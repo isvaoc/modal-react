@@ -1,8 +1,13 @@
-// webpack.config.js or any name you gave it
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack'); // only add this if you don't have yet
+const { ModuleFederationPlugin } = webpack.container;
+const deps = require('./package.json').dependencies; // webpack.config.js or any name you gave it
 
 module.exports = {
+    output: {
+
+        publicPath: 'auto'
+    },
     mode: 'development',
     devServer: {
         port: 8500,
@@ -10,8 +15,7 @@ module.exports = {
     },
     devtool: 'source-map',
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.(js|jsx|ts|tsx)$/,
                 exclude: /node_modules/,
                 use: { loader: 'babel-loader' }
@@ -22,9 +26,45 @@ module.exports = {
             }
         ]
     },
+
     plugins: [
         new HtmlWebpackPlugin({
             template: './public/index.html'
+        }),
+        new ModuleFederationPlugin({
+            name: 'app1',
+            filename: 'remoteEntry.js',
+            library: { type: 'var', name: 'app1' },
+            exposes: {
+                './App': './src/App.tsx'
+            },
+            shared: {
+                ...deps,
+                react: { singleton: true, eager: true, requiredVersion: deps.react },
+                'react-dom': {
+                    singleton: true,
+                    eager: true,
+                    requiredVersion: deps['react-dom'],
+                },
+                '@mui/material': {
+                    singleton: true,
+                    eager: true,
+                    requiredVersion: deps['@mui/material'],
+
+                },
+                '@emotion/react': {
+                    singleton: true,
+                    eager: true,
+                    requiredVersion: deps['@emotion/react'],
+
+                },
+                '@emotion/styled': {
+                    singleton: true,
+                    eager: true,
+                    requiredVersion: deps['@emotion/styled'],
+
+                }
+            },
         }),
     ],
     resolve: {
