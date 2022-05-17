@@ -32,11 +32,12 @@ module.exports = {
             template: './public/index.html'
         }),
         new ModuleFederationPlugin({
-            name: 'app1',
+            name: 'modal',
             filename: 'remoteEntry.js',
-            library: { type: 'var', name: 'app1' },
+            library: { type: 'var', name: 'modal' },
             exposes: {
-                './App': './src/App.tsx'
+                './Modal': './src/App.tsx',
+                './Renderer': './src/renderer.js'
             },
             shared: {
                 ...deps,
