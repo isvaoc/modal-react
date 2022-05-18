@@ -1,4 +1,4 @@
-var app1;
+var modal;
 /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -35607,15 +35607,18 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "webpack/container/entry/app1":
+/***/ "webpack/container/entry/modal":
 /*!***********************!*\
   !*** container entry ***!
   \***********************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 var moduleMap = {
-	"./App": function() {
-		return Promise.all([__webpack_require__.e("vendors-node_modules_mui_material_Button_Button_js-node_modules_mui_material_Dialog_Dialog_js-f86699"), __webpack_require__.e("src_App_tsx-webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_con-34223f")]).then(function() { return function() { return (__webpack_require__(/*! ./src/App.tsx */ "./src/App.tsx")); }; });
+	"./Modal": function() {
+		return Promise.all([__webpack_require__.e("vendors-node_modules_mui_material_Button_Button_js-node_modules_mui_material_Dialog_Dialog_js-840aaa"), __webpack_require__.e("webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_consume_default-baa71b"), __webpack_require__.e("src_App_tsx")]).then(function() { return function() { return (__webpack_require__(/*! ./src/App.tsx */ "./src/App.tsx")); }; });
+	},
+	"./Renderer": function() {
+		return Promise.all([__webpack_require__.e("vendors-node_modules_mui_material_Button_Button_js-node_modules_mui_material_Dialog_Dialog_js-840aaa"), __webpack_require__.e("webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_consume_default-baa71b"), __webpack_require__.e("src_renderer_js")]).then(function() { return function() { return (__webpack_require__(/*! ./src/renderer.js */ "./src/renderer.js")); }; });
 	}
 };
 var get = function(module, getScope) {
@@ -37056,8 +37059,8 @@ function combine (array, callback) {
 /******/ 		});
 /******/ 		var installedModules = {};
 /******/ 		var moduleToHandlerMapping = {
-/******/ 			"webpack/sharing/consume/default/@emotion/styled/@emotion/styled": function() { return loadSingletonVersionCheckFallback("default", "@emotion/styled", [1,11,8,1], function() { return function() { return __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/emotion-styled.browser.esm.js"); }; }); },
 /******/ 			"webpack/sharing/consume/default/react-dom/react-dom": function() { return loadSingletonVersionCheckFallback("default", "react-dom", [1,18,1,0], function() { return function() { return __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"); }; }); },
+/******/ 			"webpack/sharing/consume/default/@emotion/styled/@emotion/styled": function() { return loadSingletonVersionCheckFallback("default", "@emotion/styled", [1,11,8,1], function() { return function() { return __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/emotion-styled.browser.esm.js"); }; }); },
 /******/ 			"webpack/sharing/consume/default/react/react": function() { return loadSingletonVersionCheckFallback("default", "react", [1,18,1,0], function() { return function() { return __webpack_require__(/*! react */ "./node_modules/react/index.js"); }; }); },
 /******/ 			"webpack/sharing/consume/default/@emotion/react/@emotion/react": function() { return loadSingletonVersionCheckFallback("default", "@emotion/react", [1,11,9,0], function() { return function() { return __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js"); }; }); }
 /******/ 		};
@@ -37073,9 +37076,9 @@ function combine (array, callback) {
 /******/ 			}
 /******/ 		});
 /******/ 		var chunkMapping = {
-/******/ 			"src_App_tsx-webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_con-34223f": [
-/******/ 				"webpack/sharing/consume/default/@emotion/styled/@emotion/styled",
-/******/ 				"webpack/sharing/consume/default/react-dom/react-dom"
+/******/ 			"webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_consume_default-baa71b": [
+/******/ 				"webpack/sharing/consume/default/react-dom/react-dom",
+/******/ 				"webpack/sharing/consume/default/@emotion/styled/@emotion/styled"
 /******/ 			]
 /******/ 		};
 /******/ 		__webpack_require__.f.consumes = function(chunkId, promises) {
@@ -37115,7 +37118,7 @@ function combine (array, callback) {
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"app1": 0
+/******/ 			"modal": 0
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.j = function(chunkId, promises) {
@@ -37127,7 +37130,7 @@ function combine (array, callback) {
 /******/ 					if(installedChunkData) {
 /******/ 						promises.push(installedChunkData[2]);
 /******/ 					} else {
-/******/ 						if(true) { // all chunks have JS
+/******/ 						if("webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_consume_default-baa71b" != chunkId) {
 /******/ 							// setup Promise in chunk cache
 /******/ 							var promise = new Promise(function(resolve, reject) { installedChunkData = installedChunks[chunkId] = [resolve, reject]; });
 /******/ 							promises.push(installedChunkData[2] = promise);
@@ -37209,8 +37212,8 @@ function combine (array, callback) {
 /******/ 	// module cache are used so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	var __webpack_exports__ = __webpack_require__("webpack/container/entry/app1");
-/******/ 	app1 = __webpack_exports__;
+/******/ 	var __webpack_exports__ = __webpack_require__("webpack/container/entry/modal");
+/******/ 	modal = __webpack_exports__;
 /******/ 	
 /******/ })()
 ;

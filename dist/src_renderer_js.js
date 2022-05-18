@@ -1,5 +1,5 @@
 "use strict";
-(self["webpackChunkmodal_app"] = self["webpackChunkmodal_app"] || []).push([["src_components_Modal_tsx-webpack_sharing_consume_default_emotion_styled_emotion_styled-webpac-b04642"],{
+(self["webpackChunkmodal_app"] = self["webpackChunkmodal_app"] || []).push([["src_renderer_js"],{
 
 /***/ "./src/components/Modal.tsx":
 /*!**********************************!*\
@@ -94,7 +94,66 @@ function FormDialog() {
   });
 }
 
+/***/ }),
+
+/***/ "./src/renderer.js":
+/*!*************************!*\
+  !*** ./src/renderer.js ***!
+  \*************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderInVanilla": function() { return /* binding */ renderInVanilla; }
+/* harmony export */ });
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Modal */ "./src/components/Modal.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var renderInVanilla = function renderInVanilla(targetElement) {
+  if (!targetElement) {
+    throw new Error("Algo valio cake");
+  }
+
+  var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(targetElement);
+  root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Modal__WEBPACK_IMPORTED_MODULE_1__["default"], {}));
+};
+
+/***/ }),
+
+/***/ "./node_modules/react-dom/client.js":
+/*!******************************************!*\
+  !*** ./node_modules/react-dom/client.js ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+
+var m = __webpack_require__(/*! react-dom */ "webpack/sharing/consume/default/react-dom/react-dom");
+if (false) {} else {
+  var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+  exports.createRoot = function(c, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.createRoot(c, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+  exports.hydrateRoot = function(c, h, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.hydrateRoot(c, h, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+}
+
+
 /***/ })
 
 }]);
-//# sourceMappingURL=src_components_Modal_tsx-webpack_sharing_consume_default_emotion_styled_emotion_styled-webpac-b04642.js.map
+//# sourceMappingURL=src_renderer_js.js.map
