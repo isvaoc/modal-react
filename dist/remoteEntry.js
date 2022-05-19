@@ -1,11 +1,3 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 var modal;
 /******/ (function() { // webpackBootstrap
 /******/ 	"use strict";
@@ -247,7 +239,44 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
   \***********************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 eval("var moduleMap = {\n\t\"./Modal\": function() {\n\t\treturn Promise.all([__webpack_require__.e(\"vendors-node_modules_mui_material_Button_Button_js-node_modules_mui_material_Dialog_Dialog_js-840aaa\"), __webpack_require__.e(\"webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_consume_default-baa71b\"), __webpack_require__.e(\"src_App_tsx\")]).then(function() { return function() { return (__webpack_require__(/*! ./src/App.tsx */ \"./src/App.tsx\")); }; });\n\t},\n\t\"./Renderer\": function() {\n\t\treturn Promise.all([__webpack_require__.e(\"vendors-node_modules_mui_material_Button_Button_js-node_modules_mui_material_Dialog_Dialog_js-840aaa\"), __webpack_require__.e(\"webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_consume_default-baa71b\"), __webpack_require__.e(\"src_renderer_js\")]).then(function() { return function() { return (__webpack_require__(/*! ./src/renderer.js */ \"./src/renderer.js\")); }; });\n\t}\n};\nvar get = function(module, getScope) {\n\t__webpack_require__.R = getScope;\n\tgetScope = (\n\t\t__webpack_require__.o(moduleMap, module)\n\t\t\t? moduleMap[module]()\n\t\t\t: Promise.resolve().then(function() {\n\t\t\t\tthrow new Error('Module \"' + module + '\" does not exist in container.');\n\t\t\t})\n\t);\n\t__webpack_require__.R = undefined;\n\treturn getScope;\n};\nvar init = function(shareScope, initScope) {\n\tif (!__webpack_require__.S) return;\n\tvar name = \"default\"\n\tvar oldScope = __webpack_require__.S[name];\n\tif(oldScope && oldScope !== shareScope) throw new Error(\"Container initialization failed as it has already been initialized with a different share scope\");\n\t__webpack_require__.S[name] = shareScope;\n\treturn __webpack_require__.I(name, initScope);\n};\n\n// This exports getters to disallow modifications\n__webpack_require__.d(exports, {\n\tget: function() { return get; },\n\tinit: function() { return init; }\n});\n\n//# sourceURL=webpack://modal-app/container_entry?");
+=======
+var moduleMap = {
+	"./Modal": function() {
+		return Promise.all([__webpack_require__.e("vendors-node_modules_mui_material_Button_Button_js-node_modules_mui_material_Dialog_Dialog_js-840aaa"), __webpack_require__.e("webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_consume_default-baa71b"), __webpack_require__.e("src_App_tsx")]).then(function() { return function() { return (__webpack_require__(/*! ./src/App.tsx */ "./src/App.tsx")); }; });
+	},
+	"./Renderer": function() {
+		return Promise.all([__webpack_require__.e("vendors-node_modules_mui_material_Button_Button_js-node_modules_mui_material_Dialog_Dialog_js-840aaa"), __webpack_require__.e("webpack_sharing_consume_default_emotion_styled_emotion_styled-webpack_sharing_consume_default-baa71b"), __webpack_require__.e("src_renderer_js")]).then(function() { return function() { return (__webpack_require__(/*! ./src/renderer.js */ "./src/renderer.js")); }; });
+	}
+};
+var get = function(module, getScope) {
+	__webpack_require__.R = getScope;
+	getScope = (
+		__webpack_require__.o(moduleMap, module)
+			? moduleMap[module]()
+			: Promise.resolve().then(function() {
+				throw new Error('Module "' + module + '" does not exist in container.');
+			})
+	);
+	__webpack_require__.R = undefined;
+	return getScope;
+};
+var init = function(shareScope, initScope) {
+	if (!__webpack_require__.S) return;
+	var name = "default"
+	var oldScope = __webpack_require__.S[name];
+	if(oldScope && oldScope !== shareScope) throw new Error("Container initialization failed as it has already been initialized with a different share scope");
+	__webpack_require__.S[name] = shareScope;
+	return __webpack_require__.I(name, initScope);
+};
+
+// This exports getters to disallow modifications
+__webpack_require__.d(exports, {
+	get: function() { return get; },
+	init: function() { return init; }
+});
+>>>>>>> a827d15082f9dfe718251e6b4c8d6df57e176ee2
 
 /***/ }),
 
