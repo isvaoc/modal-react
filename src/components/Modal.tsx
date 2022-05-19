@@ -11,7 +11,7 @@ import { Observable } from 'windowed-observable';
 const observable = new Observable('modal-state');
 
 export default function FormDialog() {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     React.useEffect(() => {
         observable.subscribe((state: boolean): void => {

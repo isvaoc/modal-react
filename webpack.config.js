@@ -10,10 +10,10 @@ module.exports = {
     },
     mode: 'development',
     devServer: {
-        port: 8500,
+        port: 6001,
         open: true
     },
-    devtool: 'source-map',
+    // devtool: 'source-map',
     module: {
         rules: [{
                 test: /\.(js|jsx|ts|tsx)$/,
