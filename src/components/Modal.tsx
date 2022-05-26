@@ -8,26 +8,31 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Observable } from 'windowed-observable';
 
-const observable = new Observable('modal-state');
+const stateObservable = new Observable('modal-state');
+const titleObservable = new Observable('modal-title');
 
 export default function FormDialog() {
     const [open, setOpen] = React.useState(false);
+    const [message, setMessage] = React.useState('');
 
     React.useEffect(() => {
-        observable.subscribe((state: boolean): void => {
+        stateObservable.subscribe((state: boolean): void => {
             setOpen(state)
             console.log(state)
+        });
+        titleObservable.subscribe((title: string) => {
+            setMessage(title);
         })
     });
 
     const handleClose = () => {
-        observable.publish(false);
+        stateObservable.publish(false);
     };
 
     return (
         <div>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Subscribe</DialogTitle>
+                <DialogTitle>{message}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         To subscribe to this website, please enter your email address here. We
