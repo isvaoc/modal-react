@@ -1,11 +1,11 @@
-import { createRoot } from "react-dom/client";
-import Modal from "./components/Modal";
+import { createRoot } from 'react-dom/client';
+import Modal from './components/Modal';
 
-export const renderInVanilla = (targetElement) => {
+export const renderInVanilla = (targetElement, { projects, categories }) => {
   if (!targetElement) {
-    throw new Error("Algo valio cake");
+    throw new Error('Algo valio cake');
   }
 
   const root = createRoot(targetElement);
-  root.render(<Modal />);
+  root.render(<Modal projects={projects} categories={categories} />);
 };
