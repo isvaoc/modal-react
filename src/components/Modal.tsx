@@ -8,46 +8,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { Observable } from "windowed-observable";
 import { TextareaAutosize } from "@mui/material";
+import { Activity, Project, Category } from "../interfaces/interfaces"
 
 const stateObservable = new Observable("modal-state");
 const titleObservable = new Observable("modal-title");
-interface Category {
-  CategoryID: number;
-  CategoryName: string;
-}
-interface Project {
-  _id?: string;
-  AccountName: string;
-  ProjectAccountID: number;
-  ProjectID: number;
-  ProjectName: string;
-  ProjectCategories: Category[];
-  ProjectColor: string;
-  ProjectStartDate: string;
-  ProjectEndDate: string;
-  ProjectIsActive: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
-interface Activity {
-  _id?: string;
-  AccountName: string;
-  ActivityDate: string;
-  ActivityID: number;
-  CategoryName: string;
-  Comments: string;
-  EmployeeID: number;
-  ProjectColor: string;
-  ProjectID: number;
-  ProjectName: string;
-  StepID: number;
-  Task: string;
-  TypeID: number;
-  value: number;
-  activeInProject: boolean;
-  timestamps?: boolean;
-  versionKey?: boolean;
-}
+const apiObservable = new Observable("api-observable")
+
 export default function FormDialog(props: any) {
   const { projects, postFunction } = props;
   const [open, setOpen] = React.useState(false);
@@ -57,8 +23,8 @@ export default function FormDialog(props: any) {
   const [comments, setComments] = React.useState("");
   const [hours, setHours] = React.useState(0);
   const [ticket, setTicket] = React.useState("");
-  const [date, setDate] = React.useState(new Date());
-  const [currentProject, setCurrentProject] = React.useState({
+  const [date, setDate] = React.useState(new Date().toISOString());
+  const [currentProject, setCurrentProject] = React.useState<Project>({
     AccountName: "",
     ProjectAccountID: 0,
     ProjectID: 0,
@@ -77,18 +43,21 @@ export default function FormDialog(props: any) {
       setMessage(title);
     });
   });
- 
+
+  React.useEffect(() => {
+    changeByProject();
+  }, [project]);
 
   const handleClose = () => {
     stateObservable.publish(false);
   };
 
   const handleClick = () => {
- 
+
     if (currentProject && category) {
       const newActivity: Activity = {
         AccountName: currentProject.AccountName,
-        ActivityDate: date.toUTCString(),
+        ActivityDate: date,
         ActivityID: currentProject.ProjectID,
         CategoryName: category,
         Comments: comments,
@@ -102,15 +71,21 @@ export default function FormDialog(props: any) {
         value: hours,
         activeInProject: currentProject.ProjectIsActive,
       };
+      if (message === 'Create multiple activities' || message === 'Create activity') {
+        console.log('entro')
+        postFunction({
+          path: "nova-api/activities",
+          method: "POST",
+          body: newActivity,
+        })
+          .then((res: any) => {
+            console.log(res)
+            apiObservable.publish('post')
+          })
 
-      postFunction({
-        path: "nova-api/activities",
-        method: "POST",
-        body: newActivity,
-      })
-        .then((res: any) => console.log(res))
+          .catch((err: any) => console.log(err));
+      }
 
-        .catch((err: any) => console.log(err));
     }
   };
 
@@ -128,9 +103,7 @@ export default function FormDialog(props: any) {
 
     setCurrentProject(filterProject[0]);
   };
-  React.useEffect(() => {
-    changeByProject();
-  }, [project]);
+
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
@@ -140,13 +113,13 @@ export default function FormDialog(props: any) {
             <TextField
               id="outlined-select-currency-native"
               select
-              label="Native select"
+              label="Project"
               value={project}
               onChange={handleChangeP}
               SelectProps={{
                 native: true,
               }}
-              helperText="Please select your currency"
+           
             >
               {projects.map((option: Project) => (
                 <option key={option.ProjectID} value={option.ProjectName}>
@@ -157,13 +130,13 @@ export default function FormDialog(props: any) {
             <TextField
               id="outlined-select-currency-native"
               select
-              label="Native select"
+              label="Category"
               value={category}
               onChange={handleChangeC}
               SelectProps={{
                 native: true,
               }}
-              helperText="Please select your currency"
+             
             >
               {currentProject.ProjectCategories.map((category: Category) => (
                 <option key={category.CategoryID} value={category.CategoryName}>
@@ -171,12 +144,13 @@ export default function FormDialog(props: any) {
                 </option>
               ))}
             </TextField>
+            <label htmlFor="date">Select the date</label>
             <input
               type="date"
-              id="start"
+              id="date"
               name="trip-start"
-              value={date.toUTCString()}
-              onChange={(e) => setDate(new Date(e.target.value))}
+              value={date.split('T')[0]}
+              onChange={(e) => setDate(new Date(e.target.value).toISOString())}
             />
             <TextField
               id="outlined-number"
@@ -190,18 +164,21 @@ export default function FormDialog(props: any) {
             <TextField
               id="filled-helperText"
               label="Ticket"
-              helperText="Some important text"
-              variant="filled"
+            
+              variant="outlined"
               onChange={(e) => setTicket(e.target.value)}
             ></TextField>
             <TextareaAutosize
-              aria-label="empty textarea"
-              placeholder="comments"
-              style={{ width: 200 }}
+              
+          
+              style={{ width: 520 }}
               onChange={(e) => setComments(e.target.value)}
             />
           </DialogContentText>
-          <Button variant="outlined" onClick={handleClick}>
+          <Button variant="outlined" onClick={() => {
+            handleClick();
+            handleClose()
+          }}>
             Guardar
           </Button>
         </DialogContent>
