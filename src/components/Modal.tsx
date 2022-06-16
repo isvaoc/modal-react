@@ -1,38 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import * as React from "react";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-import { Observable } from "windowed-observable";
-import { TextareaAutosize } from "@mui/material";
-import { Activity, Project, Category } from "../interfaces/interfaces"
+import * as React from 'react';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import { Observable } from 'windowed-observable';
+import { TextareaAutosize, Box } from '@mui/material';
+import { Activity, Project, Category } from '../interfaces/interfaces';
 
-const stateObservable = new Observable("modal-state");
-const titleObservable = new Observable("modal-title");
-const apiObservable = new Observable("api-observable")
+const stateObservable = new Observable('modal-state');
+const titleObservable = new Observable('modal-title');
+const apiObservable = new Observable('api-observable');
 
 export default function FormDialog(props: any) {
   const { projects, postFunction } = props;
   const [open, setOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-  const [project, setProject] = React.useState<string>("Delivery");
-  const [category, setCategory] = React.useState("Available");
-  const [comments, setComments] = React.useState("");
+  const [message, setMessage] = React.useState('');
+  const [project, setProject] = React.useState<string>('Delivery');
+  const [category, setCategory] = React.useState('Available');
+  const [comments, setComments] = React.useState('');
   const [hours, setHours] = React.useState(0);
-  const [ticket, setTicket] = React.useState("");
+  const [ticket, setTicket] = React.useState('');
   const [date, setDate] = React.useState(new Date().toISOString());
   const [currentProject, setCurrentProject] = React.useState<Project>({
-    AccountName: "",
+    AccountName: '',
     ProjectAccountID: 0,
     ProjectID: 0,
-    ProjectName: "",
+    ProjectName: '',
     ProjectCategories: [],
-    ProjectColor: "",
-    ProjectStartDate: "",
-    ProjectEndDate: "",
+    ProjectColor: '',
+    ProjectStartDate: '',
+    ProjectEndDate: '',
     ProjectIsActive: false,
   });
   React.useEffect(() => {
@@ -53,7 +53,6 @@ export default function FormDialog(props: any) {
   };
 
   const handleClick = () => {
-
     if (currentProject && category) {
       const newActivity: Activity = {
         AccountName: currentProject.AccountName,
@@ -71,21 +70,23 @@ export default function FormDialog(props: any) {
         value: hours,
         activeInProject: currentProject.ProjectIsActive,
       };
-      if (message === 'Create multiple activities' || message === 'Create activity') {
-        console.log('entro')
+      if (
+        message === 'Create multiple activities' ||
+        message === 'Create activity'
+      ) {
+        console.log('entro');
         postFunction({
-          path: "nova-api/activities",
-          method: "POST",
+          path: 'nova-api/activities',
+          method: 'POST',
           body: newActivity,
         })
           .then((res: any) => {
-            console.log(res)
-            apiObservable.publish('post')
+            console.log(res);
+            apiObservable.publish('post');
           })
 
           .catch((err: any) => console.log(err));
       }
-
     }
   };
 
@@ -106,79 +107,108 @@ export default function FormDialog(props: any) {
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} maxWidth={1000}>
         <DialogTitle>{message}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              m: 'auto',
+              width: '60vw',
+            }}
+          >
             <TextField
-              id="outlined-select-currency-native"
+              sx={{
+                margin: 2,
+              }}
+              id='outlined-select-currency-native'
               select
-              label="Project"
+              label='Project'
               value={project}
               onChange={handleChangeP}
               SelectProps={{
                 native: true,
               }}
-           
             >
               {projects.map((option: Project) => (
                 <option key={option.ProjectID} value={option.ProjectName}>
-                  {option.ProjectIsActive ? option.ProjectName : ""}
+                  {option.ProjectIsActive ? option.ProjectName : ''}
                 </option>
               ))}
             </TextField>
             <TextField
-              id="outlined-select-currency-native"
+              sx={{
+                margin: 2,
+              }}
+              id='outlined-select-currency-native'
               select
-              label="Category"
+              label='Category'
               value={category}
               onChange={handleChangeC}
               SelectProps={{
                 native: true,
               }}
-             
             >
               {currentProject.ProjectCategories.map((category: Category) => (
                 <option key={category.CategoryID} value={category.CategoryName}>
-                  {category.CategoryName ? category.CategoryName : ""}
+                  {category.CategoryName ? category.CategoryName : ''}
                 </option>
               ))}
             </TextField>
-            <label htmlFor="date">Select the date</label>
+
+            <label htmlFor='date' style={{ marginLeft: 15 }}>
+              Select the date
+            </label>
             <input
-              type="date"
-              id="date"
-              name="trip-start"
+              style={{ marginLeft: 15, marginBottom: 5 }}
+              type='date'
+              id='date'
+              name='trip-start'
               value={date.split('T')[0]}
               onChange={(e) => setDate(new Date(e.target.value).toISOString())}
             />
+
             <TextField
-              id="outlined-number"
-              label="Hours"
-              type="number"
+              sx={{
+                margin: 2,
+              }}
+              id='outlined-number'
+              label='Hours'
+              type='number'
               InputLabelProps={{
                 shrink: true,
               }}
               onChange={(e) => setHours(parseInt(e.target.value))}
             ></TextField>
             <TextField
-              id="filled-helperText"
-              label="Ticket"
-            
-              variant="outlined"
+              sx={{
+                margin: 2,
+              }}
+              id='filled-helperText'
+              label='Ticket'
+              variant='outlined'
               onChange={(e) => setTicket(e.target.value)}
             ></TextField>
             <TextareaAutosize
-              
-          
-              style={{ width: 520 }}
+              style={{
+                height: 50,
+                width: 790,
+                marginLeft: 15,
+                marginBottom: 10,
+              }}
+              placeholder='Description'
               onChange={(e) => setComments(e.target.value)}
             />
           </DialogContentText>
-          <Button variant="outlined" onClick={() => {
-            handleClick();
-            handleClose()
-          }}>
+          <Button
+            style={{ marginLeft: 15 }}
+            variant='outlined'
+            onClick={() => {
+              handleClick();
+              handleClose();
+            }}
+          >
             Guardar
           </Button>
         </DialogContent>
