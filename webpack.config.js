@@ -62,6 +62,31 @@ module.exports = {
           eager: true,
           requiredVersion: deps["@emotion/styled"],
         },
+        "@date-io/date-fns": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["@date-io/date-fns"],
+        },
+        "@material-ui/core": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["@material-ui/core"],
+        },
+        "@material-ui/pickers": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["@material-ui/pickers"],
+        },
+        "date-fns": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["date-fns"],
+        },
+        "react-material-ui-calendar": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["react-material-ui-calendar"],
+        },
       },
     }),
   ],
