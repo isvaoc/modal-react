@@ -4,3 +4,20 @@
   justify-content: space-around !important;
   padding-left: 5px !important;
 }
+.active{
+  background-color: "pink";
+  border: "1px solid pink";
+  border-radius: "50%";
+  text-align: "center";
+  padding: "4px";
+  width: "20px";
+  height: "20px";
+}
+.inactive{
+  border: "1px solid blue";
+  border-radius: "50%";
+  text-align: "center";
+  padding: "4px";
+  width: "20px";
+  height: "20px";
+}

@@ -9,7 +9,7 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.css */ "./src/App.css");
-/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Modal */ "./src/components/Modal.tsx");
+/* harmony import */ var _components_Calendar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Calendar */ "./src/components/Calendar.tsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 function App() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "App",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Modal__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Calendar__WEBPACK_IMPORTED_MODULE_1__["default"], {})
   });
 }
 
@@ -26,27 +26,29 @@ function App() {
 
 /***/ }),
 
-/***/ "./src/components/Modal.tsx":
-/*!**********************************!*\
-  !*** ./src/components/Modal.tsx ***!
-  \**********************************/
+/***/ "./src/components/Calendar.tsx":
+/*!*************************************!*\
+  !*** ./src/components/Calendar.tsx ***!
+  \*************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ FormDialog; }
+/* harmony export */   "default": function() { return /* binding */ Calendar; }
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "webpack/sharing/consume/default/react/react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material_Dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Dialog */ "./node_modules/@mui/material/Dialog/Dialog.js");
-/* harmony import */ var _mui_material_DialogActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/DialogActions */ "./node_modules/@mui/material/DialogActions/DialogActions.js");
-/* harmony import */ var _mui_material_DialogContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/DialogContent */ "./node_modules/@mui/material/DialogContent/DialogContent.js");
-/* harmony import */ var _mui_material_DialogContentText__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/DialogContentText */ "./node_modules/@mui/material/DialogContentText/DialogContentText.js");
-/* harmony import */ var _mui_material_DialogTitle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/DialogTitle */ "./node_modules/@mui/material/DialogTitle/DialogTitle.js");
-/* harmony import */ var windowed_observable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! windowed-observable */ "./node_modules/windowed-observable/dist/windowed-observable.esm.js");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @mui/material */ "webpack/sharing/consume/default/@mui/material/@mui/material");
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "webpack/sharing/consume/default/react/react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -63,59 +65,122 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+function
+  /* {date:Date} */
+Calendar() {
+  var monthArr = [];
 
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new Date().getFullYear()),
+      _useState2 = _slicedToArray(_useState, 2),
+      year = _useState2[0],
+      setYear = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new Date().getMonth()),
+      _useState4 = _slicedToArray(_useState3, 2),
+      month = _useState4[0],
+      setMonth = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      alert = _useState6[0],
+      setAlert = _useState6[1];
 
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    calendarLogic();
+  }, []);
 
-
-
-var observable = new windowed_observable__WEBPACK_IMPORTED_MODULE_1__.Observable('modal-state');
-function FormDialog() {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(true),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      open = _React$useState2[0],
-      setOpen = _React$useState2[1];
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    observable.subscribe(function (state) {
-      setOpen(state);
-      console.log(state);
-    });
-  });
-
-  var handleClose = function handleClose() {
-    observable.publish(false);
+  var calendarLogic = function calendarLogic() {
+    var firstDayOfMonth = new Date("".concat(year, "-").concat(month + 1, "-1")).getDay();
+    initialEmptyDays(firstDayOfMonth);
+    addDays();
+    finalEmptyDays(monthArr);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_Dialog__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      open: open,
-      onClose: handleClose,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_DialogTitle__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        children: "Subscribe"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_DialogContent__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_DialogContentText__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          children: "To subscribe to this website, please enter your email address here. We will send updates occasionally."
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_7__["default"], {
-          autoFocus: true,
-          margin: "dense",
-          id: "name",
-          label: "Email Address",
-          type: "email",
-          fullWidth: true,
-          variant: "standard"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_DialogActions__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
-          onClick: handleClose,
-          children: "Cancel"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
-          onClick: handleClose,
-          children: "Subscribe"
-        })]
-      })]
-    })
+  var initialEmptyDays = function initialEmptyDays(firstDayOfMonth) {
+    monthArr.length = 0;
+    var initialEmptyDays = Array(firstDayOfMonth).fill({});
+    monthArr.push.apply(monthArr, _toConsumableArray(initialEmptyDays));
+  };
+
+  var finalEmptyDays = function finalEmptyDays(monthArr) {
+    var finalEmptyDays = Array(monthArr.length > 35 ? 42 - monthArr.length : 35 - monthArr.length).fill({});
+    monthArr.push.apply(monthArr, _toConsumableArray(finalEmptyDays));
+    return finalEmptyDays;
+  };
+
+  var addDays = function addDays() {
+    var day = {
+      day: 0,
+      activity: false,
+      date: new Date()
+    };
+
+    for (var index = 1; index < daysOfMonth(month, year) + 1; index++) {
+      day = {
+        day: index,
+        activity: false,
+        date: new Date(year, month, index)
+      };
+      monthArr.push(day);
+    }
+  };
+
+  var daysOfMonth = function daysOfMonth(month, year) {
+    var daysOfMonth = 31;
+
+    if (month === 1) {
+      daysOfMonth = isLeap(year) ? 29 : 28;
+    } else {
+      if (month === 3 || month === 5 || month === 8 || month === 10) {
+        daysOfMonth = 30;
+      }
+    }
+
+    return daysOfMonth;
+  };
+
+  var isLeap = function isLeap(year) {
+    return year % 4 == 0 && year % 100 != 0 ? true : year % 400 == 0 ? true : false;
+  };
+
+  var count = 0;
+
+  var selectDay = function selectDay(i) {
+    monthArr[i].activity = !monthArr[i].activity;
+    if (monthArr[i].activity) count++;else count--;
+    if (count > 5) setAlert(true);else setAlert(false);
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    style: {
+      border: "2px solid red"
+    },
+    children: [monthArr.length > 0 ? monthArr.map(function (day, i) {
+      console.log('algo');
+      if (day.day) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        onClick: function onClick() {
+          return selectDay(i);
+        },
+        style: day.activity ? {
+          backgroundColor: "pink",
+          width: "20px",
+          height: "20px"
+        } : {
+          border: "1px solid blue",
+          width: "20px",
+          height: "20px"
+        },
+        children: day.day
+      }, day.date.toISOString());else return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        style: {
+          width: "20px",
+          height: "20px"
+        }
+      });
+    }) : null, alert ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material__WEBPACK_IMPORTED_MODULE_0__.Alert, {
+      severity: "error",
+      children: "You can only select 5!"
+    }) : null]
   });
 }
 
@@ -137,7 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n.App-header {\n  background-color: #282c34;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n", "",{"version":3,"sources":["webpack://./src/App.css"],"names":[],"mappings":"AAAA;EACE,kBAAkB;AACpB;;AAEA;EACE,cAAc;EACd,oBAAoB;AACtB;;AAEA;EACE;IACE,4CAA4C;EAC9C;AACF;;AAEA;EACE,yBAAyB;EACzB,iBAAiB;EACjB,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,uBAAuB;EACvB,6BAA6B;EAC7B,YAAY;AACd;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE;IACE,uBAAuB;EACzB;EACA;IACE,yBAAyB;EAC3B;AACF","sourcesContent":[".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n.App-header {\n  background-color: #282c34;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".datePicker {\n  display: flex !important;\n  flex-direction: row !important;\n  justify-content: space-around !important;\n  padding-left: 5px !important;\n}\n", "",{"version":3,"sources":["webpack://./src/App.css"],"names":[],"mappings":"AAAA;EACE,wBAAwB;EACxB,8BAA8B;EAC9B,wCAAwC;EACxC,4BAA4B;AAC9B","sourcesContent":[".datePicker {\n  display: flex !important;\n  flex-direction: row !important;\n  justify-content: space-around !important;\n  padding-left: 5px !important;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
