@@ -18,7 +18,7 @@ export default function Calendar(props: any) {
   React.useEffect(() => {
     calendarLogic();
     setRenderMonth(monthArr);
-  }, []);
+  }, [setRenderMonth]);
 
   const calendarLogic = (): void => {
     const firstDayOfMonth: number = new Date(`${year}-${month + 1}-1`).getDay();
@@ -77,19 +77,23 @@ export default function Calendar(props: any) {
     monthArr = [];
     monthArr = renderMonth;
     if (monthArr[i].activity) {
+      monthArr[i].activity = !monthArr[i].activity;
       let arr = props.cloneDates;
       arr.splice([arr.indexOf(monthArr[i].date.toISOString().split("T")[0])],1);
       props.setCloneDates(arr);    
     } else if (!monthArr[i].activity) {
       let arr = props.cloneDates;
-      arr.push(monthArr[i].date.toISOString().split("T")[0]);
-      props.setCloneDates(arr);
-    }
-    monthArr[i].activity = !monthArr[i].activity;  
-    setRenderMonth(monthArr);    
-    console.log(renderMonth)
-    if (props.cloneDates.length >= 6) setAlert(true);
-    else if (props.cloneDates.length <= 6) setAlert(false);
+      if (arr.length < 5){
+        monthArr[i].activity = !monthArr[i].activity;
+        arr.push(monthArr[i].date.toISOString().split("T")[0]);
+        console.log(arr)
+      } 
+      props.setCloneDates(arr.slice(0,5));
+      setRenderMonth(monthArr); 
+    }    
+    console.log(props.cloneDates)
+    if (props.cloneDates.length >= 5) setAlert(true);
+    else if (props.cloneDates.length < 5) setAlert(false);
   };
   
   return (
@@ -112,7 +116,26 @@ export default function Calendar(props: any) {
                 <div
                   key={day.date.toISOString()}
                   onClick={() => selectDay(i)}
-                  className={day.activity?'active':'inactive'}
+                  style={
+                    day.activity
+                      ? {
+                          backgroundColor: "pink",
+                          border: "1px solid pink",
+                          borderRadius: "50%",
+                          textAlign: "center",
+                          padding: "4px",
+                          width: "20px",
+                          height: "20px",
+                        }
+                      : {
+                          border: "1px solid blue",
+                          borderRadius: "50%",
+                          textAlign: "center",
+                          padding: "4px",
+                          width: "20px",
+                          height: "20px",
+                        }
+                  }
                 >
                   {day.day}
                 </div>

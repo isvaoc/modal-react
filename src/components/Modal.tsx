@@ -36,7 +36,8 @@ export default function FormDialog(props: any) {
   const [ticket, setTicket] = React.useState<string>("");
   const [date, setDate] = React.useState(new Date().toISOString());
   const [activityId, setActivityId] = React.useState<string>("");
-  const [cloneDates, setCloneDates] = React.useState<CloneDates>([]);
+  const [cloneDates, setCloneDates] = React.useState([]);
+  const [cloneActivity, setCloneActivity] = React.useState<Activity>();
   const [currentProject, setCurrentProject] = React.useState<Project>({
     AccountName: "",
     ProjectAccountID: 0,
@@ -62,6 +63,7 @@ export default function FormDialog(props: any) {
       setHours(activity.value);
       setTicket(activity.Task);
       setComments(activity.Comments);
+      setCloneActivity(activity)
     });
     activityToUpdate.subscribe((activity: Activity) => {
       setProject(activity.ProjectName);
@@ -135,6 +137,15 @@ export default function FormDialog(props: any) {
           .catch((err: any) => console.log(err));
       } else if (message === "Clone Activity") {
         console.log("React está muy feo :(");
+        let objAct = cloneActivity
+        delete objAct?._id
+        let arr = cloneDates.map(el => {
+        return {
+          ...objAct,
+          ActivityDate: el
+        }})
+        console.log(arr)
+        console.log(cloneDates)
       }
     }
   };
