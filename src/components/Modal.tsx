@@ -16,16 +16,11 @@ const titleObservable = new Observable("modal-title");
 const apiObservable = new Observable("api-observable");
 const activityToClone = new Observable("activity-to-clone");
 const activityToUpdate = new Observable("activity-to-update");
+const snackbar$= new Observable("snackbar-observable");
+const createDate$ = new Observable('create-day')
 
 export default function FormDialog(props: any) {
-  type CloneDates = [
-    string | undefined,
-    string | undefined,
-    string | undefined,
-    string | undefined,
-    string | undefined
-  ];
-
+ 
   const { projects, apiFunction } = props;
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
@@ -54,6 +49,7 @@ export default function FormDialog(props: any) {
       setOpen(state);
     });
     titleObservable.subscribe((title: string) => {
+      console.log(title)
       setMessage(title);
     });
     activityToClone.subscribe((activity: Activity) => {
@@ -74,6 +70,10 @@ export default function FormDialog(props: any) {
       setComments(activity.Comments);
       setActivityId(activity._id ? activity._id : "");
     });
+    createDate$.subscribe((buttonDate: Date)=>{
+      console.log(buttonDate)
+setDate(buttonDate.toISOString())
+    })
   });
 
   React.useEffect(() => {
@@ -84,15 +84,9 @@ export default function FormDialog(props: any) {
     stateObservable.publish(false);
   };
 
-  let arr: string[] = [
-    new Date().toISOString(),
-    new Date().toISOString(),
-    new Date().toISOString(),
-    new Date().toISOString(),
-    new Date().toISOString(),
-  ];
-
+ 
   const handleClick = () => {
+
     if (currentProject && category) {
       const newActivity: Activity = {
         AccountName: currentProject.AccountName,
@@ -111,7 +105,7 @@ export default function FormDialog(props: any) {
         activeInProject: currentProject.ProjectIsActive,
       };
       if (
-        message === "Create multiple activities" ||
+        
         message === "Create activity"
       ) {
         apiFunction({
@@ -121,9 +115,18 @@ export default function FormDialog(props: any) {
         })
           .then((res: any) => {
             console.log(res);
+          snackbar$.publish({
+              message: res.message,
+              type: "default",
+              success: true,
+            });
             apiObservable.publish("post");
           })
-          .catch((err: any) => console.log(err));
+          .catch(()=>snackbar$.publish({
+            message: "Something went wrong, please try again",
+            type: "default",
+            success: false,
+          }));
       } else if (message === "Update Activity") {
         apiFunction({
           path: `nova-api/activities/${activityId}`,
@@ -132,9 +135,18 @@ export default function FormDialog(props: any) {
         })
           .then((res: any) => {
             console.log(res);
+            snackbar$.publish({
+              message: res.message,
+              type: "default",
+              success: true,
+            });
             apiObservable.publish("put");
           })
-          .catch((err: any) => console.log(err));
+          .catch((err: any) => snackbar$.publish({
+            message: "Something went wrong, please try again",
+            type: "default",
+            success: false,
+          }));
       } else if (message === "Clone Activity") {
         console.log("React está muy feo :(");
         let objAct = cloneActivity
@@ -144,10 +156,75 @@ export default function FormDialog(props: any) {
           ...objAct,
           ActivityDate: el
         }})
+        arr.forEach(newCloneActivity=>{ apiFunction({
+          path: `nova-api/activities/`,
+          method: "POST",
+          body: newCloneActivity,
+        })
+          .then((res: any) => {
+            console.log(res);
+             snackbar$.publish({
+              message: res.message,
+              type: "default",
+              success: true,
+            });
+            apiObservable.publish("POST");
+          })
+          .catch((err: any) => snackbar$.publish({
+            message: "Something went wrong, please try again",
+            type: "default",
+            success: false,
+          }))}
+          )
+       
         console.log(arr)
         console.log(cloneDates)
       }
+      if (message === "Create multiple activities") {
+   
+        let objAct = newActivity
+    
+        let arr = cloneDates.map(el => {
+        return {
+          ...objAct,
+          ActivityDate: el
+        }})
+        arr.forEach(newActivity=>{ apiFunction({
+          path: `nova-api/activities/`,
+          method: "POST",
+          body: newActivity,
+        })
+          .then((res: any) => {
+            console.log(res);
+             snackbar$.publish({
+              message: res.message,
+              type: "default",
+              success: true,
+            });
+            apiObservable.publish("POST");
+          })
+          .catch((err: any) => snackbar$.publish({
+            message: "Something went wrong, please try again",
+            type: "default",
+            success: false,
+          }))}
+          )
+       
+        console.log(arr)
+        console.log(cloneDates)
+      }
+      
     }
+    setCloneDates([])
+    setCloneActivity(undefined)
+    setMessage('')
+    setActivityId(0)
+    setProject('Delivery')
+    setCategory('Available')
+    setHours(0)
+    setTicket('')
+    setComments('')
+  
   };
 
   const handleChangeP = (event: React.ChangeEvent<HTMLInputElement>) => {
