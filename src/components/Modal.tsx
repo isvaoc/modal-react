@@ -148,7 +148,6 @@ setDate(buttonDate.toISOString())
             success: false,
           }));
       } else if (message === "Clone Activity") {
-        console.log("React está muy feo :(");
         let objAct = cloneActivity
         delete objAct?._id
         let arr = cloneDates.map(el => {

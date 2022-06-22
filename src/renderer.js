@@ -1,10 +1,9 @@
-import { createRoot } from 'react-dom/client';
-import Modal from './components/Modal';
+import { createRoot } from "react-dom/client";
+import Modal from "./components/Modal";
 
 export const renderInVanilla = (targetElement, projects, apiFunction) => {
- 
   if (!targetElement) {
-    throw new Error('Algo valio cake');
+    throw new Error("Please send a target to render this component");
   }
 
   const root = createRoot(targetElement);

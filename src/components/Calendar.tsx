@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Alert } from "@mui/material";
-import '../App.css'
+import "../App.css";
 
 interface Day {
   day: number;
@@ -18,7 +18,7 @@ export default function Calendar(props: any) {
   React.useEffect(() => {
     calendarLogic();
     setRenderMonth(monthArr);
-  }, [setRenderMonth]);
+  }, []);
 
   const calendarLogic = (): void => {
     const firstDayOfMonth: number = new Date(`${year}-${month + 1}-1`).getDay();
@@ -73,29 +73,33 @@ export default function Calendar(props: any) {
       : false;
   };
 
-  const selectDay = (i: number): void => {
+  const selectDay = (i: number, e: any): void => {
     monthArr = [];
     monthArr = renderMonth;
     if (monthArr[i].activity) {
       monthArr[i].activity = !monthArr[i].activity;
       let arr = props.cloneDates;
-      arr.splice([arr.indexOf(monthArr[i].date.toISOString().split("T")[0])],1);
-      props.setCloneDates(arr);    
+      arr.splice(
+        [arr.indexOf(monthArr[i].date.toISOString().split("T")[0])],
+        1
+      );
+      e.target.classList.remove("active")
+      props.setCloneDates(arr);
     } else if (!monthArr[i].activity) {
       let arr = props.cloneDates;
-      if (arr.length < 5){
+      if (arr.length < 5) {
         monthArr[i].activity = !monthArr[i].activity;
+        e.target.classList.add("active")
         arr.push(monthArr[i].date.toISOString().split("T")[0]);
-        console.log(arr)
-      } 
-      props.setCloneDates(arr.slice(0,5));
-      setRenderMonth(monthArr); 
-    }    
-    console.log(props.cloneDates)
+      }
+      props.setCloneDates(arr.slice(0, 5));
+      setRenderMonth(monthArr);
+    }
+    console.log(props.cloneDates);
     if (props.cloneDates.length >= 5) setAlert(true);
     else if (props.cloneDates.length < 5) setAlert(false);
   };
-  
+
   return (
     <div style={{ maxWidth: "35vw" }}>
       <p style={{ textAlign: "center" }}>
@@ -115,27 +119,8 @@ export default function Calendar(props: any) {
               return (
                 <div
                   key={day.date.toISOString()}
-                  onClick={() => selectDay(i)}
-                  style={
-                    day.activity
-                      ? {
-                          backgroundColor: "pink",
-                          border: "1px solid pink",
-                          borderRadius: "50%",
-                          textAlign: "center",
-                          padding: "4px",
-                          width: "20px",
-                          height: "20px",
-                        }
-                      : {
-                          border: "1px solid blue",
-                          borderRadius: "50%",
-                          textAlign: "center",
-                          padding: "4px",
-                          width: "20px",
-                          height: "20px",
-                        }
-                  }
+                  onClick={(e) => selectDay(i, e)}
+                  className="basic"
                 >
                   {day.day}
                 </div>
