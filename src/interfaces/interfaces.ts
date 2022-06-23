@@ -23,7 +23,7 @@ export interface Activity {
     ActivityID: number;
     CategoryName: string;
     Comments: string;
-    EmployeeID: number;
+    EmployeeID: string;
     ProjectColor: string;
     ProjectID: number;
     ProjectName: string;

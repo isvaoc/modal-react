@@ -94,7 +94,7 @@ setDate(buttonDate.toISOString())
         ActivityID: currentProject.ProjectID,
         CategoryName: category,
         Comments: comments,
-        EmployeeID: 0,
+        EmployeeID: sessionStorage.getItem('id'),
         ProjectColor: currentProject.ProjectColor,
         ProjectID: currentProject.ProjectID,
         ProjectName: currentProject.ProjectName,
